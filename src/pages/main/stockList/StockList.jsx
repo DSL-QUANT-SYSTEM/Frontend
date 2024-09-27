@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './stockList.module.css';
 import { userData03 } from '../../../data/dummyData03';
 import { useNavigate } from 'react-router-dom';
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
 
 export const StockList = () => {
     const navigate = useNavigate();
@@ -11,32 +13,34 @@ export const StockList = () => {
         // navigate(`/stockinfo/${name}`);
     };
 
+    const columns = [
+        { field: 'rank', headerName: '순위' },
+        { field: 'name', headerName: '종목명' },
+        {
+            field: 'now',
+            headerName: '현재가',
+            valueFormatter: ({ value }) => (value ? value.toLocaleString() : ''),
+        },
+    ];
+
+    const rows = userData03.map((data, index) => ({
+        id: index,
+        rank: data.rank,
+        name: data.name,
+        now: data.now,
+    }));
+
+    const paginationModel = { page: 0, pageSize: 100 };
+
     return (
-        <div className={styles.stocklist}>
-            <div className={styles.title}>코인 종목</div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>순위</th>
-                        <th>종목명</th>
-                        <th>현재가</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {userData03.map((data, index) => (
-                        <tr key={index}>
-                            <td>{data.rank}</td>
-                            <td className={styles.dataText} onClick={() => onClick(data.name)}>
-                                {' '}
-                                {data.name}
-                            </td>
-                            <td className={styles.dataNum} onClick={() => onClick(data.name)}>
-                                {data.now.toLocaleString()}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <Paper>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{ pagination: { paginationModel } }}
+                pageSizeOptions={[10, 20, 50, 100]}
+                onRowClick={(params) => onClick(params.row.name)}
+            />
+        </Paper>
     );
 };
