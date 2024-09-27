@@ -1,23 +1,28 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:import/recommended",
-    "plugin:jsx-a11y/recommended",
-    "eslint-config-prettier"
-  ],
-  "settings": {
-    "react": {
-      "version": "detect"
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:import/recommended",
+        "airbnb",
+        "plugin:jsx-a11y/recommended",
+        "eslint-config-prettier"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "node": {
+                "paths": ["src"],
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
     },
-    "import/resolver": {
-      "node": {
-        "paths": ["src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
+    "rules": {
+        "quotes": ["error", "single"],
+        "no-duplicate-imports": "error",
+        "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+        "no-unused-vars": "error",
+        "no-multiple-empty-lines": "error"
     }
-  },
-  "rules": {
-    // Add your own rules here to override ones from the extended configs.
-  }
 }

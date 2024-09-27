@@ -55,7 +55,8 @@ export const StrategyMain = () => {
         { label: '볼린저밴드', value: 'strategy/bollinger' },
         { label: 'RSI, MFI, MACD 지표 이용', value: 'strategy/rsi' },
         { label: '엔벨로프', value: 'strategy/env' },
-        { label: '윌리엄스%R', value: 'strategy/williams' },
+        { label: '윌리엄스', value: 'strategy/williams' },
+        { label: '복수 선택', value: 'strategy/multi' },
     ];
 
     const handleChange = (e) => {
@@ -63,7 +64,11 @@ export const StrategyMain = () => {
         setFormData((prevData) => {
             const newFormData = { ...prevData, [name]: value };
 
-            if (name === 'end_date' && newFormData.start_date && new Date(value) < new Date(newFormData.start_date)) {
+            if (
+                name === 'end_date' &&
+                newFormData.start_date &&
+                new Date(value) < new Date(newFormData.start_date)
+            ) {
                 alert('종료일은 시작일보다 빠를 수 없습니다.');
                 return prevData;
             }
@@ -184,11 +189,21 @@ export const StrategyMain = () => {
                 <div className={styles.input}>
                     <div className={styles.inputHalf}>
                         <div className={styles.subtitleDate}>시작일 설정</div>
-                        <InputBox type="date" name="start_date" value={formData.start_date} onChange={handleChange} />
+                        <InputBox
+                            type="date"
+                            name="start_date"
+                            value={formData.start_date}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.inputHalf}>
                         <div className={styles.subtitleDate}>종료일 설정</div>
-                        <InputBox type="date" name="end_date" value={formData.end_date} onChange={handleChange} />
+                        <InputBox
+                            type="date"
+                            name="end_date"
+                            value={formData.end_date}
+                            onChange={handleChange}
+                        />
                     </div>
                 </div>
             </div>

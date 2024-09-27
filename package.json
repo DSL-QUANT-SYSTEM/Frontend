@@ -16,7 +16,7 @@
         "axios": "^1.7.7",
         "browserslist": "^4.23.2",
         "classnames": "^2.5.1",
-        "eslint": "^9.10.0",
+        "eslint": "^9.11.1",
         "eslint-config-prettier": "^9.1.0",
         "global": "4.4.0",
         "jsonwebtoken": "^9.0.2",
@@ -36,7 +36,7 @@
     },
     "scripts": {
         "dev": "vite --host 0.0.0.0 --port 5173",
-        "start": "node ./src/data/excelToDummy.js && vite",
+        "start": "vite",
         "build": "vite build",
         "test": "vite test",
         "eject": "vite eject",
@@ -62,8 +62,12 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.10.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-plugin-import": "^2.30.0",
+        "eslint-plugin-jsx-a11y": "^6.10.0",
         "eslint-plugin-prettier": "^5.2.1",
-        "eslint-plugin-react": "^7.35.2",
+        "eslint-plugin-react": "^7.37.0",
+        "eslint-plugin-react-hooks": "^4.6.2",
         "globals": "^15.9.0"
     }
 }
