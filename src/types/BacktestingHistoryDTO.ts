@@ -4,8 +4,6 @@ export class BackTestingHistory {
     date: string;
     initialInvestment: number;
     tax: number;
-    startDate: string;
-    endDate: string;
     targetItem: string;
     candleType: string;
     inqRange: number;
@@ -17,8 +15,6 @@ export class BackTestingHistory {
         date: string;
         initialInvestment: number;
         tax: number;
-        startDate: string;
-        endDate: string;
         targetItem: string;
         candleType: string;
         inqRange: number;
@@ -29,8 +25,6 @@ export class BackTestingHistory {
         this.date = data.date;
         this.initialInvestment = data.initialInvestment;
         this.tax = data.tax;
-        this.startDate = data.startDate;
-        this.endDate = data.endDate;
         this.targetItem = data.targetItem;
         this.candleType = data.candleType;
         this.inqRange = data.inqRange;
@@ -39,6 +33,6 @@ export class BackTestingHistory {
     }
 
     getBacktestingInfo(): string {
-        return `${this.id} - ${this.date} - ${this.initialInvestment} - ${this.tax} - ${this.startDate} - ${this.endDate} - ${this.targetItem} - ${this.candleType} - ${this.inqRange} - ${this.strategy} - ${this.fileHtml}`;
+        return `${this.id} - ${this.date} - ${this.initialInvestment} - ${this.tax} -  ${this.targetItem} - ${this.candleType} - ${this.inqRange} - ${this.strategy} - ${this.fileHtml}`;
     }
 }

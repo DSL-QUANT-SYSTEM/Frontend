@@ -17,8 +17,6 @@ export const StrategyMain = () => {
     const [formData, setFormData] = useState({
         initial_investment: 0,
         tax: 0.01,
-        start_date: '',
-        end_date: '',
         target_item: '',
         tick_kind: '',
         inq_range: 0,
@@ -56,32 +54,12 @@ export const StrategyMain = () => {
         { label: 'RSI, MFI, MACD 지표 이용', value: 'strategy/rsi' },
         { label: '엔벨로프', value: 'strategy/env' },
         { label: '윌리엄스', value: 'strategy/williams' },
-        { label: '복수 선택', value: 'strategy/multi' },
     ];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => {
             const newFormData = { ...prevData, [name]: value };
-
-            if (
-                name === 'end_date' &&
-                newFormData.start_date &&
-                new Date(value) < new Date(newFormData.start_date)
-            ) {
-                alert('종료일은 시작일보다 빠를 수 없습니다.');
-                return prevData;
-            }
-
-            if (
-                (name === 'inq_range_start' || name === 'inq_range_end') &&
-                newFormData.inq_range_start &&
-                newFormData.inq_range_end &&
-                parseFloat(newFormData.inq_range_start) > parseFloat(newFormData.inq_range_end)
-            ) {
-                alert('조회 범위의 시작 값은 종료 값보다 클 수 없습니다.');
-                return prevData;
-            }
 
             if (name === 'initial_investment' && parseFloat(value) < 0) {
                 alert('초기 투자 금액은 0보다 작을 수 없습니다.');
@@ -98,8 +76,27 @@ export const StrategyMain = () => {
     };
 
     const handleSubmit = async () => {
-        const strategyCommonDTO = new StrategyCommonDTO(formData);
-        console.log(strategyCommonDTO);
+        // 현재 시간을 추가합니다.
+        const currentTime = new Date();
+
+        // ISO 형식: "YYYY-MM-DD HH:MM:SS"
+        const year = currentTime.getFullYear();
+        const month = String(currentTime.getMonth() + 1).padStart(2, '0');
+        const day = String(currentTime.getDate()).padStart(2, '0');
+        const hours = String(currentTime.getHours()).padStart(2, '0');
+        const minutes = String(currentTime.getMinutes()).padStart(2, '0');
+        const seconds = String(currentTime.getSeconds()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+        // formData에 포맷된 시간을 추가하여 새로운 객체로 만듭니다.
+        const formDataWithTime = {
+            ...formData,
+            backtesting_date: formattedDate, // ISO 형식으로 변환하여 시간을 보냅니다.
+        };
+        const strategyCommonDTO = new StrategyCommonDTO(formDataWithTime);
+
+        // console.log(strategyCommonDTO);
         setStrategyCommonData(strategyCommonDTO);
 
         try {
@@ -109,7 +106,7 @@ export const StrategyMain = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Response:', response.data);
+            // console.log('Response:', response.data);
         } catch (error) {
             console.error('There was an error submitting the common strategy!', error);
         }
@@ -122,34 +119,21 @@ export const StrategyMain = () => {
             selectedStrategy &&
             formData.initial_investment &&
             formData.tax &&
-            formData.start_date &&
-            formData.end_date &&
             formData.target_item &&
             formData.tick_kind &&
             formData.inq_range
         ) {
             navigate(`/${selectedStrategy}`);
         } else {
-            if (!selectedStrategy) {
-                alert('전략을 선택해주세요.');
-            }
-            if (!formData.initial_investment) {
-                alert('초기 투자 금액을 입력해주세요.');
-            }
-            if (!formData.tax) {
-                alert('거래 수수료를 선택해주세요.');
-            }
-            if (!formData.start_date || !formData.end_date) {
-                alert('기간 설정을 해주세요.');
-            }
-            if (!formData.target_item) {
-                alert('종목 이름을 입력해주세요.');
-            }
-            if (!formData.tick_kind) {
-                alert('캔들 종류를 선택해주세요.');
-            }
-            if (!formData.inq_range) {
-                alert('조회 범위를 입력해주세요.');
+            if (
+                !selectedStrategy ||
+                !formData.initial_investment ||
+                !formData.tax ||
+                !formData.target_item ||
+                !formData.tick_kind ||
+                !formData.inq_range
+            ) {
+                alert('모든 값을 입력해주세요.');
             }
         }
     };
@@ -182,29 +166,6 @@ export const StrategyMain = () => {
                         value={formData.tax}
                         onChange={handleChange}
                     />
-                </div>
-            </div>
-            <div className={styles.select}>
-                <div className={styles.subtitle}>기간 설정</div>
-                <div className={styles.input}>
-                    <div className={styles.inputHalf}>
-                        <div className={styles.subtitleDate}>시작일 설정</div>
-                        <InputBox
-                            type="date"
-                            name="start_date"
-                            value={formData.start_date}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className={styles.inputHalf}>
-                        <div className={styles.subtitleDate}>종료일 설정</div>
-                        <InputBox
-                            type="date"
-                            name="end_date"
-                            value={formData.end_date}
-                            onChange={handleChange}
-                        />
-                    </div>
                 </div>
             </div>
             <div className={styles.select}>

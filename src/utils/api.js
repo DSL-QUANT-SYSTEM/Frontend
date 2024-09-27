@@ -7,7 +7,7 @@ axios
     .get(`${SURL}`)
     .then((response) => {
         // 응답 데이터를 처리합니다.
-        console.log(response.data);
+        // console.log(response.data);
     })
     .catch((error) => {
         // 오류 처리를 수행합니다.
@@ -19,7 +19,7 @@ axios
     .post(`${SURL}`, { key: 'value' })
     .then((response) => {
         // 응답 데이터를 처리합니다.
-        console.log(response.data);
+        // console.log(response.data);
     })
     .catch((error) => {
         // 오류 처리를 수행합니다.

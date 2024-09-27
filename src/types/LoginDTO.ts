@@ -8,5 +8,9 @@ export class KakaoLoginResponseDTO {
      * @param {string} [kakaoName] - 사용자의 카카오 이름 (선택적)
      * @param {string} [email] - 사용자의 이메일 (선택적)
      */
-    constructor(public code: string, public kakaoName: string = '', public email: string = '') {}
+    constructor(
+        public code: string,
+        public kakaoName: string = '',
+        public email: string = '',
+    ) {}
 }

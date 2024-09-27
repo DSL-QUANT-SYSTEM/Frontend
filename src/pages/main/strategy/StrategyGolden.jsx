@@ -47,7 +47,7 @@ export const StrategyGolden = () => {
 
     const handleSubmit = async () => {
         const strategy1DTO = new StrategyGoldenDTO(formData);
-        console.log(strategy1DTO);
+        // console.log(strategy1DTO);
         setStrategy1Data(strategy1DTO);
 
         try {
@@ -57,7 +57,7 @@ export const StrategyGolden = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Response:', response.data);
+            // console.log('Response:', response.data);
         } catch (error) {
             console.error('There was an error submitting the golden/dead cross strategy!', error);
         }
@@ -65,11 +65,8 @@ export const StrategyGolden = () => {
         if (formData.fastMoveAvg && formData.slowMoveAvg) {
             navigate(`/result/${id}`);
         } else {
-            if (!formData.fastMoveAvg) {
-                alert('빠른 이동 평균 기간을 입력해주세요.');
-            }
-            if (!formData.slowMoveAvg) {
-                alert('느린 이동 평균 기간을 입력해주세요.');
+            if (!formData.fastMoveAvg || !formData.slowMoveAvg) {
+                alert('이동 평균 기간을 입력해주세요.');
             }
         }
     };

@@ -10,7 +10,7 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 export const StrategyEnv = () => {
-    const SURL=import.meta.env.VITE_APP_URI;
+    const SURL = import.meta.env.VITE_APP_URI;
 
     const { setStrategy4Data } = useContext(StrategyContext);
     const [formData, setFormData] = useState({
@@ -53,7 +53,7 @@ export const StrategyEnv = () => {
 
     const handleSubmit = async () => {
         const strategy4DTO = new StrategyEnvDTO(formData);
-        console.log(strategy4DTO);
+        // console.log(strategy4DTO);
         setStrategy4Data(strategy4DTO);
 
         try {
@@ -63,22 +63,16 @@ export const StrategyEnv = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Response:', response.data);
+            // console.log('Response:', response.data);
         } catch (error) {
             console.error('There was an error submitting the envelope strategy!', error);
         }
 
-        if (formData.moving_up && formData.moving_down  && formData.movingAveragePeriod) {
+        if (formData.moving_up && formData.moving_down && formData.movingAveragePeriod) {
             navigate(`/result/${id}`);
         } else {
-            if (!formData.moving_up) {
-                alert('상단폭 값을 입력해주세요(기본값 1)');
-            }
-            if (!formData.moving_down) {
-                alert('하단폭 값을 입력해주세요(기본값 1)');
-            }
-            if (!formData.movingAveragePeriod) {
-                alert('기간 값을 입력해주세요(기본값 20)');
+            if (!formData.moving_up || !formData.moving_down || !formData.movingAveragePeriod) {
+                alert('상단폭, 하단폭, 기간 값을 입력해주세요.');
             }
         }
     };
@@ -127,8 +121,8 @@ export const StrategyEnv = () => {
                 </div>
             </div>
             <div className={styles.btnWrapper}>
-                <ColorBtn className={styles.btnPrev} text="< 이전" onClick={handlePrevClick}/>
-                <ColorBtn className={styles.btnNext} text="백테스트" onClick={handleSubmit}/>
+                <ColorBtn className={styles.btnPrev} text="< 이전" onClick={handlePrevClick} />
+                <ColorBtn className={styles.btnNext} text="백테스트" onClick={handleSubmit} />
             </div>
         </div>
     );

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import styles from "./stockInfo.module.css";
-import { CandleChart } from "../../../components/chart/CandleChart";
-import { LineChart } from "../../../components/chart/LineChart";
-import { getKosdaq } from "../../../utils/kosdakApi";
-import { Loading } from "../../../components/loading/Loading";
+import React, { useEffect, useState } from 'react';
+import styles from './stockInfo.module.css';
+import { CandleChart } from '../../../components/chart/CandleChart';
+import { LineChart } from '../../../components/chart/LineChart';
+import { getKosdaq } from '../../../utils/kosdakApi';
+import { Loading } from '../../../components/loading/Loading';
 
 export const StockInfo = () => {
     const [kosdaq, setKosdaq] = useState(null);
@@ -13,18 +13,18 @@ export const StockInfo = () => {
                 const kosdaqData = await getKosdaq();
                 setKosdaq(kosdaqData);
             } catch (error) {
-                console.error("StockInfo fetchData error: ", error);
+                console.error('StockInfo fetchData error: ', error);
             }
         };
         fetchData();
     }, []);
 
-    const close = kosdaq ? kosdaq[0].closingPrice : "num";
-    const high = kosdaq ? kosdaq[0].highPrice : "num";
-    const low = kosdaq ? kosdaq[0].lowPrice : "num";
-    const open = kosdaq ? kosdaq[0].openingPrice : "num";
-    const rate = kosdaq ? kosdaq[0].fluctuatingRate : "num";
-    const volume = kosdaq ? kosdaq[0].tradingVolume : "num";
+    const close = kosdaq ? kosdaq[0].closingPrice : 'num';
+    const high = kosdaq ? kosdaq[0].highPrice : 'num';
+    const low = kosdaq ? kosdaq[0].lowPrice : 'num';
+    const open = kosdaq ? kosdaq[0].openingPrice : 'num';
+    const rate = kosdaq ? kosdaq[0].fluctuatingRate : 'num';
+    const volume = kosdaq ? kosdaq[0].tradingVolume : 'num';
 
     if (!kosdaq) {
         return (
@@ -64,7 +64,7 @@ export const StockInfo = () => {
                         low: item.lowPrice,
                         volume: item.tradingVolume,
                         rate: item.fluctuatingRate,
-                        date: item.date || "", // date가 없을 경우 빈 문자열
+                        date: item.date || '', // date가 없을 경우 빈 문자열
                     }))}
                 />
             </div>
@@ -78,7 +78,7 @@ export const StockInfo = () => {
                         low: item.lowPrice,
                         volume: item.tradingVolume,
                         rate: item.fluctuatingRate,
-                        date: item.date || "", // date가 없을 경우 빈 문자열
+                        date: item.date || '', // date가 없을 경우 빈 문자열
                     }))}
                 />
             </div>

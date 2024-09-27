@@ -39,7 +39,7 @@ export const StrategyRSI = () => {
     const handleSubmit = async () => {
         const SURL = import.meta.env.VITE_APP_URI;
         const strategy3DTO = new StrategyRsiDTO(formData);
-        console.log(strategy3DTO);
+        // console.log(strategy3DTO);
         setStrategy3Data(strategy3DTO);
 
         try {
@@ -49,7 +49,7 @@ export const StrategyRSI = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Response:', response.data);
+            // console.log('Response:', response.data);
         } catch (error) {
             console.error('There was an error submitting the common strategy!', error);
         }

@@ -39,7 +39,7 @@ export const StrategyBollinger = () => {
     const handleSubmit = async () => {
         const SURL = import.meta.env.VITE_APP_URI;
         const strategy2DTO = new StrategyBollingerDTO(formData);
-        console.log(strategy2DTO);
+        // console.log(strategy2DTO);
         setStrategy2Data(strategy2DTO);
 
         try {
@@ -49,7 +49,7 @@ export const StrategyBollinger = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Response:', response.data);
+            // console.log('Response:', response.data);
         } catch (error) {
             console.error('There was an error submitting the common strategy!', error);
         }

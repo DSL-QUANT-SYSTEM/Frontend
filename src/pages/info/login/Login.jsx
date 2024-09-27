@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./login.module.css";
-import { ImgBtn } from "../../../components/button/imgBtn/ImgBtn";
-import KakaoLoginLogo from "../../../assets/kakao_login_medium_wide.png";
+import React from 'react';
+import styles from './login.module.css';
+import { ImgBtn } from '../../../components/button/imgBtn/ImgBtn';
+import KakaoLoginLogo from '../../../assets/kakao_login_medium_wide.png';
 
 export const Login = () => {
     const REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY_KAKAO;
@@ -10,7 +10,7 @@ export const Login = () => {
 
     // 로그인 페이지로 이동
     const kakaoHandler = () => {
-        window.open(KAKAO_AUTH_URI, "_self");
+        window.open(KAKAO_AUTH_URI, '_self');
     };
 
     return (

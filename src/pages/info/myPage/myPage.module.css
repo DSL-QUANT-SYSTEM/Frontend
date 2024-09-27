@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 .title {
@@ -86,6 +87,7 @@
 .btn {
     width: 16%;
     font-size: var(--subtitle-size);
+    font-family: var(--font-1);
     background-color: var(--point-color);
     border: none;
     border-radius: var(--border-radius);

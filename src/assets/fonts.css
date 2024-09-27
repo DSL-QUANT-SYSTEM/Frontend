@@ -4,7 +4,8 @@
 /* 어그로체(300,500,700) */
 @font-face {
     font-family: 'JalnanGothic';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff')
+        format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -13,7 +14,8 @@
 /* 프리텐다드(100~900) */
 @font-face {
     font-family: 'Pretendard-Bold';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+        format('woff');
     font-weight: 400;
     font-style: normal;
 }
@@ -22,7 +24,8 @@
 /* 프리텐다드(100~900) */
 @font-face {
     font-family: 'Pretendard-Medium';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff')
+        format('woff');
     font-weight: 400;
     font-style: normal;
 }
@@ -31,7 +34,8 @@
 /* Neo둥근모 */
 @font-face {
     font-family: 'NeoDunggeunmo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff')
+        format('woff');
     font-weight: normal;
     font-style: normal;
 }

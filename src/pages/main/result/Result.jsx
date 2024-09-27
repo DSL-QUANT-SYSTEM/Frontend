@@ -4,8 +4,16 @@ import { StrategyContext } from '../../../context/StrategyContext';
 import { useParams } from 'react-router-dom';
 
 export const Result = () => {
-    const { strategyCommonData, strategy1Data, strategy2Data, strategy3Data, resultData, setResultData } =
-        useContext(StrategyContext);
+    const {
+        strategyCommonData,
+        strategy1Data,
+        strategy2Data,
+        strategy3Data,
+        strategy4Data,
+        strategy5Data,
+        resultData,
+        setResultData,
+    } = useContext(StrategyContext);
     const { id } = useParams(); // URL에서 id를 추출합니다.
     const SURL = import.meta.env.VITE_APP_URI;
 
@@ -28,7 +36,7 @@ export const Result = () => {
             })
             .then((data) => {
                 setResultData(data);
-                console.log('Updated resultData:', data); // 상태 업데이트 후 로그 추가
+                // console.log('Updated resultData:', data); // 상태 업데이트 후 로그 추가
             })
             .catch((error) => {
                 console.error('백엔드에서 결과 데이터를 가져오는 중 오류가 발생했습니다:', error);
@@ -123,6 +131,20 @@ export const Result = () => {
                                     <td>{JSON.stringify(value)}</td>
                                 </tr>
                             ))}
+                        {id === 'env' &&
+                            Object.entries(strategy4Data).map(([key, value]) => (
+                                <tr key={key}>
+                                    <th>{key}</th>
+                                    <td>{JSON.stringify(value)}</td>
+                                </tr>
+                            ))}
+                        {id === 'williams' &&
+                            Object.entries(strategy5Data).map(([key, value]) => (
+                                <tr key={key}>
+                                    <th>{key}</th>
+                                    <td>{JSON.stringify(value)}</td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>
@@ -159,7 +181,10 @@ export const Result = () => {
                 </tbody>
             </table>
             <div className={styles.box}>
-                <div>해당 분석 결과를 추후에도 확인하고 싶다면 아래의 html로 저장하기 버튼을 눌러주세요</div>
+                <div>
+                    해당 분석 결과를 추후에도 확인하고 싶다면 아래의 html로 저장하기 버튼을
+                    눌러주세요
+                </div>
                 <div>파일 분석 팁💡💡</div>
                 <div className={styles.download} onClick={saveHtml}>
                     HTML로 저장하기

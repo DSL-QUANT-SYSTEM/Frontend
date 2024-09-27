@@ -31,7 +31,7 @@ export class UserInfoDTO {
 
     getUserInfo(): string {
         return `${this.userName} - ${this.userPhone} - ${this.userBirthday} - ${this.userGender} - ${JSON.stringify(
-            this.backtestRecords
+            this.backtestRecords,
         )}`;
     }
 }

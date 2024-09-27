@@ -90,6 +90,8 @@ export const Navigator = () => {
                                 activePage === '/strategy/golden' ||
                                 activePage === '/strategy/bollinger' ||
                                 activePage === '/strategy/rsi' ||
+                                activePage === '/strategy/env' ||
+                                activePage === 'straategy/williams' ||
                                 activePage.startsWith('/result'),
                         })}
                         onClick={() => navigate('/strategy')}

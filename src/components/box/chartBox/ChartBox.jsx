@@ -1,6 +1,6 @@
 //주식 참고 자료 박스
-import React from "react";
-import styles from "./chartBox.module.css";
+import React from 'react';
+import styles from './chartBox.module.css';
 
 export const ChartBox = ({ title, currency, price, arrow, rate, chart }) => {
     return (

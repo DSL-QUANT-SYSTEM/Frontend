@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FeaturedInfo } from '../../../components/featuredInfo/FeaturedInfo';
 import styles from './home.module.css';
 import { HorizonTableTop20 } from '../../../components/table/horizonTable/HorizonTable';

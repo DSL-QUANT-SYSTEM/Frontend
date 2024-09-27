@@ -63,6 +63,8 @@ export const MyPage = () => {
         { label: '골든/데드', value: 'golden' },
         { label: '볼린저밴드', value: 'bollinger' },
         { label: 'RSI, MFI, MACD 지표 이용', value: 'rsi' },
+        { label: '엔벨로프', value: 'env' },
+        { label: '윌리엄스', value: 'williams' },
     ];
 
     return (
@@ -106,8 +108,16 @@ export const MyPage = () => {
                         조회
                     </button>
                 </div>
-                {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-                {isTableVisible && backHistory.length > 0 && (
+                {errorMessage && (
+                    <>
+                        <div className={styles.error}>{errorMessage}</div>
+                        <div className={styles.error}>전략설정을 진행해주세요.</div>
+                        <div className={styles.error}>
+                            <a href="/strategy">전략설정하러 가기</a>
+                        </div>
+                    </>
+                )}
+                {!errorMessage && isTableVisible && backHistory.length > 0 && (
                     <table className={styles.tableH}>
                         <thead>
                             <tr>

@@ -1,7 +1,7 @@
-import React from "react";
-import Chart from "react-apexcharts";
-import styles from "./chart.module.css";
-import { Loading } from "../loading/Loading";
+import React from 'react';
+import Chart from 'react-apexcharts';
+import styles from './chart.module.css';
+import { Loading } from '../loading/Loading';
 
 export const LineChart = ({ title, dataKey, chartData }) => {
     // chartData가 비어있거나 undefined일 때 처리
@@ -29,14 +29,14 @@ export const LineChart = ({ title, dataKey, chartData }) => {
 
     const options = {
         chart: {
-            type: "area",
-            height: "100%",
+            type: 'area',
+            height: '100%',
             animations: {
                 enabled: false,
             },
             zoom: {
                 enabled: true, // 확대/축소 기능 활성화
-                type: "x", // 확대/축소 유형: x와 y축 모두
+                type: 'x', // 확대/축소 유형: x와 y축 모두
                 autoScaleYaxis: true, // 확대 시 y축 자동 스케일링
             },
             toolbar: {
@@ -51,7 +51,7 @@ export const LineChart = ({ title, dataKey, chartData }) => {
                         {
                             icon: '<div class="icon">1Y</div>', // 사용자 정의 아이콘 (1년)
                             index: 1,
-                            title: "1 Year",
+                            title: '1 Year',
                             click: function (chart) {
                                 chart.zoomX(
                                     new Date(
@@ -64,7 +64,7 @@ export const LineChart = ({ title, dataKey, chartData }) => {
                         {
                             icon: '<div class="icon">6M</div>', // 사용자 정의 아이콘 (6개월)
                             index: 2,
-                            title: "6 Month",
+                            title: '6 Month',
                             click: function (chart) {
                                 chart.zoomX(
                                     new Date(
@@ -77,7 +77,7 @@ export const LineChart = ({ title, dataKey, chartData }) => {
                         {
                             icon: '<div class="icon">3M</div>', // 사용자 정의 아이콘 (3개월)
                             index: 3,
-                            title: "3 Month",
+                            title: '3 Month',
                             click: function (chart) {
                                 chart.zoomX(
                                     new Date(
@@ -90,7 +90,7 @@ export const LineChart = ({ title, dataKey, chartData }) => {
                         {
                             icon: '<div class="icon">1M</div>', // 사용자 정의 아이콘 (1개월)
                             index: 4,
-                            title: "1 Month",
+                            title: '1 Month',
                             click: function (chart) {
                                 chart.zoomX(
                                     new Date(
@@ -103,7 +103,7 @@ export const LineChart = ({ title, dataKey, chartData }) => {
                         {
                             icon: '<div class="icon">1W</div>', // 사용자 정의 아이콘 (1주일)
                             index: 5,
-                            title: "1 Week",
+                            title: '1 Week',
                             click: function (chart) {
                                 chart.zoomX(
                                     new Date(
@@ -131,12 +131,12 @@ export const LineChart = ({ title, dataKey, chartData }) => {
         },
         title: {
             text: title,
-            align: "left",
+            align: 'left',
         },
         xaxis: {
-            type: "datetime",
+            type: 'datetime',
             labels: {
-                format: "MM/dd",
+                format: 'MM/dd',
             },
         },
         yaxis: {
@@ -146,12 +146,12 @@ export const LineChart = ({ title, dataKey, chartData }) => {
         },
         tooltip: {
             x: {
-                format: "yy/MM",
+                format: 'yy/MM',
                 show: false,
             },
             custom: function ({ seriesIndex, dataPointIndex, w }) {
                 const data = w.globals.initialSeries[seriesIndex].data[dataPointIndex].meta;
-                const date = data.date ? new Date(data.date).toLocaleDateString() : "N/A";
+                const date = data.date ? new Date(data.date).toLocaleDateString() : 'N/A';
 
                 return `<div class="tooltip">
                           <div><strong>Date:</strong> ${date}</div>
@@ -170,17 +170,17 @@ export const LineChart = ({ title, dataKey, chartData }) => {
             yaxis: [
                 {
                     y: chartData[chartData.length - 2][dataKey],
-                    borderColor: "var(--color-3)",
-                    strokeDashArray: "var(--stroke-dash-array)",
+                    borderColor: 'var(--color-3)',
+                    strokeDashArray: 'var(--stroke-dash-array)',
                 },
             ],
         },
         stroke: {
-            curve: "straight",
+            curve: 'straight',
             width: 2,
         },
         fill: {
-            type: "gradient",
+            type: 'gradient',
             gradient: {
                 shadeIntensity: 1,
                 opacityFrom: 0.4,
@@ -192,7 +192,7 @@ export const LineChart = ({ title, dataKey, chartData }) => {
             size: 0,
         },
         colors: [
-            chartData[1][dataKey] < chartData[0][dataKey] ? "var(--up-color)" : "var(--down-color)",
+            chartData[1][dataKey] < chartData[0][dataKey] ? 'var(--up-color)' : 'var(--down-color)',
         ],
     };
 

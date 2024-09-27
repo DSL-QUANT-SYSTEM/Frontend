@@ -1,13 +1,13 @@
 // 상단 참고 주식 자료 구조
-import React, { useEffect, useState } from "react";
-import styles from "./featuredInfo.module.css";
-import { ArrowDown, ArrowUp } from "../emoticon/Arrow";
-import { ChartBox } from "../box/chartBox/ChartBox";
-import { LineChart } from "../chart/LineChart";
-import { Loading } from "../loading/Loading";
-import { getKosdaq } from "../../utils/kosdakApi";
-import { getKospi } from "../../utils/kospiApi";
-import { getKospi200 } from "../../utils/kospi200Api";
+import React, { useEffect, useState } from 'react';
+import styles from './featuredInfo.module.css';
+import { ArrowDown, ArrowUp } from '../emoticon/Arrow';
+import { ChartBox } from '../box/chartBox/ChartBox';
+import { LineChart } from '../chart/LineChart';
+import { Loading } from '../loading/Loading';
+import { getKosdaq } from '../../utils/kosdakApi';
+import { getKospi } from '../../utils/kospiApi';
+import { getKospi200 } from '../../utils/kospi200Api';
 
 export const FeaturedInfo = () => {
     //API를 통해 받아온 데이터를 저장
@@ -28,7 +28,7 @@ export const FeaturedInfo = () => {
                 const kospi200Data = await getKospi200();
                 setKospi200(kospi200Data);
             } catch (error) {
-                console.error("FeaturedInfo fetchData error: ", error);
+                console.error('FeaturedInfo fetchData error: ', error);
             }
         };
         fetchData();
@@ -56,7 +56,7 @@ export const FeaturedInfo = () => {
                                     low: item.lowPrice,
                                     volume: item.tradingVolume,
                                     rate: item.fluctuatingRate,
-                                    date: item.date || "", // date가 없을 경우 빈 문자열
+                                    date: item.date || '', // date가 없을 경우 빈 문자열
                                 }))}
                             />
                         }
@@ -83,7 +83,7 @@ export const FeaturedInfo = () => {
                                     low: item.lowPrice,
                                     volume: item.tradingVolume,
                                     rate: item.fluctuatingRate,
-                                    date: item.date || " ",
+                                    date: item.date || ' ',
                                 }))}
                             />
                         }
@@ -111,7 +111,7 @@ export const FeaturedInfo = () => {
                                     low: item.lowPrice,
                                     volume: item.tradingVolume,
                                     rate: item.fluctuatingRate,
-                                    date: item.date || " ",
+                                    date: item.date || ' ',
                                 }))}
                             />
                         }
