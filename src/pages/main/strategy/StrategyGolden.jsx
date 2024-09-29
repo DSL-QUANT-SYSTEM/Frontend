@@ -9,7 +9,7 @@ import { StrategyContext } from '../../../context/StrategyContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-export const StrategyGolden = () => {
+export const StrategyGolden = (setSubmit) => {
     const SURL = import.meta.env.VITE_APP_URI;
 
     const { setStrategy1Data } = useContext(StrategyContext);
