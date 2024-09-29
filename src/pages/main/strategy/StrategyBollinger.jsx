@@ -69,7 +69,7 @@ export const StrategyBollinger = ({ setSubmit }) => {
     }, [setSubmit]);
 
     return (
-        <div className={styles.strategy}>
+        <div className={styles.strategyComponent}>
             <div className={styles.title}>볼린저밴드 전략 설정</div>
             <div className={styles.select}>
                 <div className={styles.subtitle}>이동 평균 기간</div>

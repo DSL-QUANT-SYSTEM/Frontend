@@ -71,7 +71,7 @@ export const StrategyWilliams = ({ setSubmit }) => {
     }, [setSubmit]);
 
     return (
-        <div className={styles.strategy}>
+        <div className={styles.strategyComponent}>
             <div className={styles.title}>Williams %R 지표 이용 전략 설정</div>
             <div className={styles.select}>
                 <div className={styles.subtitle}>빠른 이동 평균 기간</div>

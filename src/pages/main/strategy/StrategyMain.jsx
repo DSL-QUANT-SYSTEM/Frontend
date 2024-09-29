@@ -216,7 +216,7 @@ export const StrategyMain = () => {
                     />
                 </div>
             </div>
-            <div className={styles.titleStrategy}>전략 선택</div>
+            <div className={styles.titleSecond}>전략 선택</div>
             <div className={styles.select}>
                 <div className={styles.input}>
                     <SelectBox

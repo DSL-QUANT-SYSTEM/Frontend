@@ -85,7 +85,7 @@ export const StrategyEnv = ({ setSubmit }) => {
     }, [setSubmit]);
 
     return (
-        <div className={styles.strategy}>
+        <div className={styles.strategyComponent}>
             <div className={styles.title}>엔벨로프 전략 설정</div>
             <div className={styles.select}>
                 <div className={styles.subtitle}>상단 폭 값</div>
