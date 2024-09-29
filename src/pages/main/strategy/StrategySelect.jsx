@@ -42,7 +42,7 @@ export const StrategySelect = () => {
             alert('전략을 선택해주세요.');
             return;
         }
-        navigate(`/strategy/multi/${strategy1.id}/${strategy2.id}`);
+        navigate(`/strategy/${strategy1.id}/${strategy2.id}`);
     };
 
     return (
@@ -152,10 +152,12 @@ export const StrategySelect = () => {
                 </div>
                 <Slider
                     defaultValue={50}
-                    getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
-                    step={5}
-                    marks
+                    valueLabelFormat={(value) =>
+                        `${strategy1.value}-${value}%, ${strategy2.value}-${100 - value}%`
+                    }
+                    step={10}
+                    // marks
                     min={0}
                     max={100}
                 />

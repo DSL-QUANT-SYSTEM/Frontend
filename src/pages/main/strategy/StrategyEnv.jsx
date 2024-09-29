@@ -1,6 +1,6 @@
 //엔벨로프 전략페이지
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styles from './strategy.module.css';
 import { ColorBtn } from '../../../components/button/colorBtn/ColorBtn';
 import { InputBox } from '../../../components/box/inputBox/InputBox';
@@ -9,7 +9,7 @@ import { StrategyContext } from '../../../context/StrategyContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-export const StrategyEnv = () => {
+export const StrategyEnv = ({ setSubmit }) => {
     const SURL = import.meta.env.VITE_APP_URI;
 
     const { setStrategy4Data } = useContext(StrategyContext);
@@ -77,13 +77,16 @@ export const StrategyEnv = () => {
         }
     };
 
-    const handlePrevClick = () => {
-        navigate('/strategy');
-    };
+    // setSubmit에 handleSubmit 함수를 전달
+    useEffect(() => {
+        if (typeof setSubmit === 'function') {
+            setSubmit(() => handleSubmit);
+        }
+    }, [setSubmit]);
 
     return (
         <div className={styles.strategy}>
-            <div className={styles.title}>엔벨로프 전략 설정 페이지</div>
+            <div className={styles.title}>엔벨로프 전략 설정</div>
             <div className={styles.select}>
                 <div className={styles.subtitle}>상단 폭 값</div>
                 <div className={styles.input}>
@@ -119,10 +122,6 @@ export const StrategyEnv = () => {
                         onChange={handleChange}
                     />
                 </div>
-            </div>
-            <div className={styles.btnWrapper}>
-                <ColorBtn className={styles.btnPrev} text="< 이전" onClick={handlePrevClick} />
-                <ColorBtn className={styles.btnNext} text="백테스트" onClick={handleSubmit} />
             </div>
         </div>
     );

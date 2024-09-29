@@ -1,6 +1,6 @@
 //볼린저밴드 전략페이지
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styles from './strategy.module.css';
 import { ColorBtn } from '../../../components/button/colorBtn/ColorBtn';
 import { InputBox } from '../../../components/box/inputBox/InputBox';
@@ -9,7 +9,7 @@ import { StrategyContext } from '../../../context/StrategyContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-export const StrategyBollinger = () => {
+export const StrategyBollinger = ({ setSubmit }) => {
     const { setStrategy2Data } = useContext(StrategyContext);
     const [formData, setFormData] = useState({
         move_period: [0, 0],
@@ -61,13 +61,16 @@ export const StrategyBollinger = () => {
         }
     };
 
-    const handlePrevClick = () => {
-        navigate('/strategy');
-    };
+    // setSubmit에 handleSubmit 함수를 전달
+    useEffect(() => {
+        if (typeof setSubmit === 'function') {
+            setSubmit(() => handleSubmit);
+        }
+    }, [setSubmit]);
 
     return (
         <div className={styles.strategy}>
-            <div className={styles.title}>볼린저밴드 전략 설정 페이지</div>
+            <div className={styles.title}>볼린저밴드 전략 설정</div>
             <div className={styles.select}>
                 <div className={styles.subtitle}>이동 평균 기간</div>
                 <div className={styles.input}>
@@ -79,10 +82,6 @@ export const StrategyBollinger = () => {
                         onChange={handleChange}
                     />
                 </div>
-            </div>
-            <div className={styles.btnWrapper} id="btn-to-result">
-                <ColorBtn className={styles.btnPrev} text="< 이전" onClick={handlePrevClick} />
-                <ColorBtn className={styles.btnNext} text="백테스트" onClick={handleSubmit} />
             </div>
         </div>
     );

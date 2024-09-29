@@ -1,5 +1,4 @@
 //공통전략설정 및 전략 선택 페이지
-//공통전략설정 및 전략 선택 페이지
 
 import React, { useContext, useState } from 'react';
 import styles from './strategy.module.css';

@@ -1,6 +1,6 @@
 //rsi, mfi, macd 지표 이용 전략 설정 페이지
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styles from './strategy.module.css';
 import { ColorBtn } from '../../../components/button/colorBtn/ColorBtn';
 import { InputBox } from '../../../components/box/inputBox/InputBox';
@@ -9,7 +9,7 @@ import { StrategyContext } from '../../../context/StrategyContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-export const StrategyRSI = () => {
+export const StrategyRSI = ({ setSubmit }) => {
     const { setStrategy3Data } = useContext(StrategyContext);
     const [formData, setFormData] = useState({
         rsiPeriod: 0,
@@ -58,18 +58,21 @@ export const StrategyRSI = () => {
             navigate(`/result/${id}`);
         } else {
             if (!formData.rsiPeriod) {
-                alert('RSI 계산을 위한 시작일과 종료일을 입력해주세요.');
+                alert('RSI 계산을 위한 기간을 입력해주세요.');
             }
         }
     };
 
-    const handlePrevClick = () => {
-        navigate('/strategy');
-    };
+    // setSubmit에 handleSubmit 함수를 전달
+    useEffect(() => {
+        if (typeof setSubmit === 'function') {
+            setSubmit(() => handleSubmit);
+        }
+    }, [setSubmit]);
 
     return (
         <div className={styles.strategy}>
-            <div className={styles.title}>RSI, MFI, MACD 지표 이용 전략 설정 페이지</div>
+            <div className={styles.title}>RSI, MFI, MACD 지표 이용 전략 설정</div>
             <div className={styles.select}>
                 <div className={styles.subtitle}>빠른 이동 평균 기간</div>
                 <div className={styles.input}>
@@ -81,11 +84,6 @@ export const StrategyRSI = () => {
                         onChange={handleChange}
                     />
                 </div>
-            </div>
-
-            <div className={styles.btnWrapper}>
-                <ColorBtn className={styles.btnPrev} text="< 이전" onClick={handlePrevClick} />
-                <ColorBtn className={styles.btnNext} text="백테스트" onClick={handleSubmit} />
             </div>
         </div>
     );
