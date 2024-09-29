@@ -13,27 +13,6 @@
     margin-bottom: var(--margin);
 }
 
-.table th {
-    padding: 12px 0; /*padding/2*/
-}
-
-.table td {
-    padding: 12px 24px;
-}
-
-.dataText {
-    text-align: left;
-    width: 72%;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.dataNum {
-    text-align: right;
-    width: 20%;
-    cursor: pointer;
-}
-
 /* 반응형 */
 @media (max-width: 1068px) {
     .stocklist {

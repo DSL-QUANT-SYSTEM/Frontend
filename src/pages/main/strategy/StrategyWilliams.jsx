@@ -58,7 +58,7 @@ export const StrategyWilliams = () => {
             navigate(`/result/${id}`);
         } else {
             if (!formData.williamsPeriod) {
-                alert('Williams %R 데이터를 입력해주세요.(기본값은 14입니다.)');
+                alert('Williams 데이터를 입력해주세요.(기본값은 14입니다.)');
             }
         }
     };

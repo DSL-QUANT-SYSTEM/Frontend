@@ -72,7 +72,7 @@ export const StrategyEnv = () => {
             navigate(`/result/${id}`);
         } else {
             if (!formData.moving_up || !formData.moving_down || !formData.movingAveragePeriod) {
-                alert('상단폭, 하단폭, 기간 값을 입력해주세요.');
+                alert('선택되지 않은 옵션이 있습니다\n모든 옵션을 선택해주세요');
             }
         }
     };

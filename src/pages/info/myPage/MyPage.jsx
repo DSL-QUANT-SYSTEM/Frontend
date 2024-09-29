@@ -15,7 +15,6 @@ export const MyPage = () => {
     });
     const [errorMessage, setErrorMessage] = useState('');
 
-    //사용자 정보를 가져오는 동안 로딩 상태 표시
     useEffect(() => {
         const fetchData = async () => {
             try {

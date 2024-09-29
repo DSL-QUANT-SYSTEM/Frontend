@@ -32,25 +32,31 @@ function App() {
                         <Navigator />
                         <div className="container">
                             <Routes>
-                                <Route path="/home" element={<Home />} />
+                                <Route path="/home/" element={<Home />} />
                                 <Route path="/" element={<Explain />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/login/oauth2/code/kakao" element={<LoginHandler />} />
-                                <Route path="/stocklist" element={<StockList />} />
-                                <Route path="/stockinfo" element={<StockInfo />} />
-                                <Route path="/mypage" element={<MyPage />} />
-                                <Route path="/result/:id" element={<Result />} />
-                                <Route path="/strategy" element={<StrategyMain />} />
-                                <Route path="/strategy/golden" element={<StrategyGolden />} />
-                                <Route path="/strategy/bollinger" element={<StrategyBollinger />} />
-                                <Route path="/strategy/rsi" element={<StrategyRSI />} />
-                                <Route path="/strategy/env" element={<StrategyEnv />} />
-                                <Route path="/strategy/williams" element={<StrategyWilliams />} />
+                                <Route path="/stocklist/" element={<StockList />} />
+                                <Route path="/stockinfo/" element={<StockInfo />} />
+                                <Route path="/mypage/" element={<MyPage />} />
+                                <Route path="/result/:id/" element={<Result />} />
+                                <Route path="/strategy/" element={<StrategyMain />} />
+                                <Route path="/strategy/golden/" element={<StrategyGolden />} />
+                                <Route
+                                    path="/strategy/bollinger/"
+                                    element={<StrategyBollinger />}
+                                />
+                                <Route path="/strategy/rsi/" element={<StrategyRSI />} />
+                                <Route path="/strategy/env/" element={<StrategyEnv />} />
+                                <Route path="/strategy/williams/" element={<StrategyWilliams />} />
                                 <Route
                                     path="/strategy/multi/:strategy1/:strategy2"
                                     element={<StrategyMulti />}
                                 />
                                 <Route path="/strategy/select" element={<StrategySelect />} />
+                                <Route path="/login/" element={<Login />} />
+                                <Route
+                                    path="/login/oauth2/code/kakao/"
+                                    element={<LoginHandler />}
+                                />
                             </Routes>
                         </div>
                         <Footer />
