@@ -34,6 +34,11 @@ function App() {
                             <Routes>
                                 <Route path="/home/" element={<Home />} />
                                 <Route path="/" element={<Explain />} />
+                                <Route path="/login/" element={<Login />} />
+                                <Route
+                                    path="/login/oauth2/code/kakao/"
+                                    element={<LoginHandler />}
+                                />
                                 <Route path="/stocklist/" element={<StockList />} />
                                 <Route path="/stockinfo/" element={<StockInfo />} />
                                 <Route path="/mypage/" element={<MyPage />} />
@@ -48,15 +53,10 @@ function App() {
                                 <Route path="/strategy/env/" element={<StrategyEnv />} />
                                 <Route path="/strategy/williams/" element={<StrategyWilliams />} />
                                 <Route
-                                    path="/strategy/multi/:strategy1/:strategy2"
+                                    path="/strategy/multi/:strategy1/:strategy2/"
                                     element={<StrategyMulti />}
                                 />
-                                <Route path="/strategy/select" element={<StrategySelect />} />
-                                <Route path="/login/" element={<Login />} />
-                                <Route
-                                    path="/login/oauth2/code/kakao/"
-                                    element={<LoginHandler />}
-                                />
+                                <Route path="/strategy/select/" element={<StrategySelect />} />
                             </Routes>
                         </div>
                         <Footer />
