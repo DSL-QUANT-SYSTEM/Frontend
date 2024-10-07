@@ -60,7 +60,7 @@ export const StrategySelect = () => {
                     <div className={styles.radio}>
                         <input
                             type="radio"
-                            id="bolinger"
+                            id="bollinger"
                             name="strategy1"
                             value="볼린저밴드"
                             onChange={handleStrategyChange}
@@ -115,7 +115,7 @@ export const StrategySelect = () => {
                     <div className={styles.radio}>
                         <input
                             type="radio"
-                            id="bolinger"
+                            id="bollinger"
                             name="strategy2"
                             value="볼린저밴드"
                             onChange={handleStrategyChange}
@@ -193,10 +193,6 @@ export const StrategySelect = () => {
                         },
                     }}
                     defaultValue={50}
-                    valueLabelDisplay="auto"
-                    valueLabelFormat={(value) =>
-                        `${strategy1.value}-${value}%, ${strategy2.value}-${100 - value}%`
-                    }
                     step={10}
                     // marks
                     min={0}

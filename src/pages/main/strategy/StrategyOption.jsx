@@ -21,7 +21,7 @@ export const StrategyOption = () => {
         switch (strategy) {
             case 'golden':
                 return <StrategyGolden setSubmit={setSubmitHandler} />;
-            case 'bolinger':
+            case 'bollinger':
                 return <StrategyBollinger setSubmit={setSubmitHandler} />;
             case 'rsi':
                 return <StrategyRSI setSubmit={setSubmitHandler} />;

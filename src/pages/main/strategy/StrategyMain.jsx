@@ -53,7 +53,8 @@ export const StrategyMain = () => {
         { label: '볼린저밴드', value: 'strategy/bollinger' },
         { label: 'RSI, MFI, MACD 지표 이용', value: 'strategy/rsi' },
         { label: '엔벨로프', value: 'strategy/env' },
-        { label: '윌리엄스%R', value: 'strategy/williams' },
+        { label: '윌리엄스', value: 'strategy/williams' },
+        { label: '복수선택', value: 'strategy/select' },
     ];
 
     const handleChange = (e) => {
