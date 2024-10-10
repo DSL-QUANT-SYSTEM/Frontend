@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { StrategyGolden } from './StrategyGolden';
 import { StrategyBollinger } from './StrategyBollinger';
 import { StrategyRSI } from './StrategyRSI';
@@ -42,11 +42,15 @@ export const StrategyOption = () => {
     // 백테스트 버튼 클릭 시 두 전략의 submit 함수를 실행
     const handleSubmit = async () => {
         if (typeof submit1 === 'function') {
-            submit1(); // 첫 번째 전략의 submit 함수 호출
+            await submit1(); // 첫 번째 전략의 submit 함수 호출
         }
         if (typeof submit2 === 'function') {
-            submit2(); // 두 번째 전략의 submit 함수 호출
+            await submit2(); // 두 번째 전략의 submit 함수 호출
         }
+
+        // 현재 경로에서 두 전략을 확인하고 결과 페이지로 이동
+        const resultPath = `/result/${strategy1}${strategy2 ? `/${strategy2}` : ''}`;
+        navigate(resultPath);
     };
 
     return (

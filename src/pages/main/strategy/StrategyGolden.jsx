@@ -9,7 +9,7 @@ import { StrategyContext } from '../../../context/StrategyContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-export const StrategyGolden = (setSubmit) => {
+export const StrategyGolden = ({ setSubmit }) => {
     const SURL = import.meta.env.VITE_APP_URI;
 
     const { setStrategy1Data } = useContext(StrategyContext);
@@ -41,33 +41,42 @@ export const StrategyGolden = (setSubmit) => {
                 return prevData;
             }
 
+            localStorage.setItem('goldenStrategy', JSON.stringify(newFormData));
+
             return newFormData;
         });
     };
 
     const handleSubmit = async () => {
-        const strategy1DTO = new StrategyGoldenDTO(formData);
-        // console.log(strategy1DTO);
-        setStrategy1Data(strategy1DTO);
+        const savedStrategyData = localStorage.getItem('goldenStrategy');
+        const strategyData = savedStrategyData ? JSON.parse(savedStrategyData) : null;
 
-        try {
-            const token = localStorage.getItem('jwt'); // JWT 토큰 가져오기
-            const response = await axios.post(`${SURL}/strategy/golden`, strategy1DTO, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            // console.log('Response:', response.data);
-        } catch (error) {
-            console.error('There was an error submitting the golden/dead cross strategy!', error);
-        }
+        const strategy1DTO = strategyData ? new StrategyGoldenDTO(strategyData) : null;
 
-        if (formData.fastMoveAvg && formData.slowMoveAvg) {
-            navigate(`/result/${id}`);
-        } else {
-            if (!formData.fastMoveAvg || !formData.slowMoveAvg) {
+        if (strategy1DTO) {
+            setStrategy1Data(strategy1DTO);
+
+            try {
+                const token = localStorage.getItem('jwt');
+                const response = await axios.post(`${SURL}/strategy/golden`, strategy1DTO, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            } catch (error) {
+                console.error(
+                    'There was an error submitting the golden/dead cross strategy!',
+                    error,
+                );
+            }
+
+            if (strategyData.fastMoveAvg && strategyData.slowMoveAvg) {
+                navigate(`/result/${id}`);
+            } else {
                 alert('이동 평균 기간을 입력해주세요.');
             }
+        } else {
+            alert('이동 평균 기간을 입력해주세요.');
         }
     };
 

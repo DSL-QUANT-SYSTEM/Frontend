@@ -1,12 +1,9 @@
-//엔벨로프 전략페이지
-
 import React, { useContext, useState, useEffect } from 'react';
 import styles from './strategy.module.css';
-import { ColorBtn } from '../../../components/button/colorBtn/ColorBtn';
 import { InputBox } from '../../../components/box/inputBox/InputBox';
 import { StrategyEnvDTO } from '../../../types/StrategyDTO';
 import { StrategyContext } from '../../../context/StrategyContext';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 export const StrategyEnv = ({ setSubmit }) => {
@@ -14,7 +11,6 @@ export const StrategyEnv = ({ setSubmit }) => {
 
     const { setStrategy4Data } = useContext(StrategyContext);
     const [formData, setFormData] = useState({
-        //골든
         moving_up: '',
         moving_down: '',
         movingAveragePeriod: 0,
@@ -30,50 +26,60 @@ export const StrategyEnv = ({ setSubmit }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => {
-            const newFormData = { ...prevData, [name]: Number(value) };
+            const newFormData = { ...prevData, [name]: value };
 
-            if (name === 'moving_up' && parseFloat(value) < 0) {
+            // 입력값 검증
+            if (
+                (name === 'moving_up' ||
+                    name === 'moving_down' ||
+                    name === 'movingAveragePeriod') &&
+                parseFloat(value) < 0
+            ) {
                 alert('입력값은 0보다 작을 수 없습니다.');
                 return prevData;
             }
 
-            if (name === 'moving_down' && parseFloat(value) < 0) {
-                alert('입력값은 0보다 작을 수 없습니다.');
-                return prevData;
-            }
-
-            if (name === 'movingAveragePeriod' && parseFloat(value) < 0) {
-                alert('입력값은 0보다 작을 수 없습니다.');
-                return prevData;
-            }
+            // localStorage에 저장
+            localStorage.setItem('envStrategy', JSON.stringify(newFormData));
 
             return newFormData;
         });
     };
 
     const handleSubmit = async () => {
-        const strategy4DTO = new StrategyEnvDTO(formData);
-        // console.log(strategy4DTO);
-        setStrategy4Data(strategy4DTO);
+        // localStorage에서 값 불러오기
+        const savedStrategyData = localStorage.getItem('envStrategy');
+        const strategyData = savedStrategyData ? JSON.parse(savedStrategyData) : null;
 
-        try {
-            const token = localStorage.getItem('jwt'); // JWT 토큰 가져오기
-            const response = await axios.post(`${SURL}/strategy/env`, strategy4DTO, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            // console.log('Response:', response.data);
-        } catch (error) {
-            console.error('There was an error submitting the envelope strategy!', error);
-        }
+        // DTO 생성
+        const strategy4DTO = strategyData ? new StrategyEnvDTO(strategyData) : null;
 
-        if (formData.moving_up && formData.moving_down && formData.movingAveragePeriod) {
-            navigate(`/result/${id}`);
-        } else {
-            if (!formData.moving_up || !formData.moving_down || !formData.movingAveragePeriod) {
-                alert('선택되지 않은 옵션이 있습니다\n모든 옵션을 선택해주세요');
+        if (strategy4DTO) {
+            setStrategy4Data(strategy4DTO);
+
+            try {
+                const token = localStorage.getItem('jwt'); // JWT 토큰 가져오기
+                const response = await axios.post(`${SURL}/strategy/env`, strategy4DTO, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                // console.log('Response:', response.data);
+            } catch (error) {
+                console.error('There was an error submitting the envelope strategy!', error);
             }
+
+            if (
+                strategyData.moving_up &&
+                strategyData.moving_down &&
+                strategyData.movingAveragePeriod
+            ) {
+                navigate(`/result/${id}`);
+            } else {
+                alert('모든 옵션을 선택해주세요');
+            }
+        } else {
+            alert('모든 옵션을 선택해주세요');
         }
     };
 

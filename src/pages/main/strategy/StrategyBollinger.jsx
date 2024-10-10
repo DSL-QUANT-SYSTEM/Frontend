@@ -1,5 +1,3 @@
-//볼린저밴드 전략페이지
-
 import React, { useContext, useState, useEffect } from 'react';
 import styles from './strategy.module.css';
 import { ColorBtn } from '../../../components/button/colorBtn/ColorBtn';
@@ -12,7 +10,7 @@ import axios from 'axios';
 export const StrategyBollinger = ({ setSubmit }) => {
     const { setStrategy2Data } = useContext(StrategyContext);
     const [formData, setFormData] = useState({
-        move_period: [0, 0],
+        moveAvg: 0, // move_avg를 기본값 0으로 초기화
     });
 
     const navigate = useNavigate();
@@ -27,10 +25,14 @@ export const StrategyBollinger = ({ setSubmit }) => {
         setFormData((prevData) => {
             const newFormData = { ...prevData, [name]: value };
 
+            // 입력값 검증
             if (name === 'moveAvg' && parseFloat(value) < 0) {
                 alert('입력값은 0보다 작을 수 없습니다.');
                 return prevData;
             }
+
+            // localStorage에 저장
+            localStorage.setItem('bollingerStrategy', JSON.stringify(newFormData));
 
             return newFormData;
         });
@@ -38,24 +40,34 @@ export const StrategyBollinger = ({ setSubmit }) => {
 
     const handleSubmit = async () => {
         const SURL = import.meta.env.VITE_APP_URI;
-        const strategy2DTO = new StrategyBollingerDTO(formData);
-        // console.log(strategy2DTO);
-        setStrategy2Data(strategy2DTO);
 
-        try {
-            const token = localStorage.getItem('jwt'); // JWT 토큰 가져오기
-            const response = await axios.post(`${SURL}/strategy/bollinger`, strategy2DTO, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            // console.log('Response:', response.data);
-        } catch (error) {
-            console.error('There was an error submitting the common strategy!', error);
-        }
+        // localStorage에서 값 불러오기
+        const savedStrategyData = localStorage.getItem('bollingerStrategy');
+        const strategyData = savedStrategyData ? JSON.parse(savedStrategyData) : null;
 
-        if (formData.moveAvg) {
-            navigate(`/result/${id}`);
+        // DTO 생성
+        const strategy2DTO = strategyData ? new StrategyBollingerDTO(strategyData) : null;
+
+        if (strategy2DTO) {
+            setStrategy2Data(strategy2DTO);
+
+            try {
+                const token = localStorage.getItem('jwt'); // JWT 토큰 가져오기
+                const response = await axios.post(`${SURL}/strategy/bollinger`, strategy2DTO, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                // console.log('Response:', response.data);
+            } catch (error) {
+                console.error('There was an error submitting the common strategy!', error);
+            }
+
+            if (strategyData.moveAvg) {
+                navigate(`/result/${id}`);
+            } else {
+                alert('이동 평균 기간을 입력해주세요.');
+            }
         } else {
             alert('이동 평균 기간을 입력해주세요.');
         }
